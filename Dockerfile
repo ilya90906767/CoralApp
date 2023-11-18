@@ -12,5 +12,6 @@ RUN pip install poetry
 ADD pyproject.toml . 
 RUN poetry config virtualenvs.create false 
 RUN poetry install --no-root --no-interaction --no-ansi 
+RUN poetry run python3 web/app.py 
 EXPOSE 8000 
 COPY . .
