@@ -1,17 +1,22 @@
-FROM python:3.11-buster 
+FROM python:3.10-alpine3.13
+LABEL maintainer="@betyaev-ilya"
 
-ENV PYTHONDONTWRITEBYTECODE 1 
-ENV PYTHONUNBUFFERED 1 
+ENV PYTHONUNBUFFERED 1
 
 
-WORKDIR /code 
-RUN apt-get update && \ 
-    apt install -y python3-dev 
-RUN pip install --upgrade pip 
-RUN pip install poetry 
-ADD pyproject.toml . 
-RUN poetry config virtualenvs.create false 
-RUN poetry install --no-root --no-interaction --no-ansi 
-RUN poetry run python3 web/app.py 
-EXPOSE 8000 
-COPY . .
+COPY ./web/requirements.txt /tmp/requirements.txt
+COPY ./web /app
+WORKDIR /app
+EXPOSE 8000
+
+RUN python -m venv /venv 
+RUN /venv/bin/pip install --upgrade pip 
+RUN apk add --update --no-cache postgresql-client 
+RUN apk add --update --no-cache --virtual .tmp-build-deps \
+        build-base postgresql-dev musl-dev 
+RUN /venv/bin/pip install -r /tmp/requirements.txt
+RUN rm -rf /tmp
+RUN apk del .tmp-build-deps 
+
+
+ENV PATH="/venv/bin:$PATH"
