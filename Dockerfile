@@ -4,7 +4,7 @@ LABEL maintainer="@betyaev-ilya"
 ENV PYTHONUNBUFFERED 1
 
 
-COPY ./web/requirements.txt /tmp/requirements.txt
+COPY ./requirements.txt /tmp/requirements.txt
 COPY ./web /app
 WORKDIR /app
 EXPOSE 8000
