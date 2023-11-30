@@ -33,7 +33,7 @@
                         <a href="/">About</a>
                     </li>
                     <li>
-                        <a href="/registration">Create Account</a>
+                        <a href="/register">Create Account</a>
                     </li>
                     <li class="active">
                         <a href="/login">Sign In</a>
@@ -133,18 +133,18 @@
         <div class="row">
             <div class="col-md-8">
                 <form method='POST' name="sentMessage" id="contactForm" novalidate>
-
+                    {% csrf_token %} 
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Email:</label>
-                            <input type="tel" class="form-control" id="email" required data-validation-required-message="Please enter your email.">
+                            <input type="email" name="email" class="form-control" id="email" required data-validation-required-message="Please enter your email.">
                         </div>
                     </div>
 
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Password:</label>
-                            <input type="email" class="form-control" id="password" required data-validation-required-message="Please enter your password.">
+                            <input type="password" name="password" class="form-control" id="password" required data-validation-required-message="Please enter your password.">
                         </div>
                     </div>
 
