@@ -82,6 +82,18 @@
         <!-- /.container -->
     </nav>
 
+    {% if messages %}
+    <ul class="messages">
+        {% for msg in messages %}       
+        <li>
+            <div class="alert-danger" role="alert">
+            {{msg.message}}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     <div class="container">
 
         <!-- Page Heading/Breadcrumbs -->
