@@ -5,8 +5,7 @@ ENV PYTHONUNBUFFERED 1
 
 
 COPY ./requirements.txt /tmp/requirements.txt
-COPY ./web /app
-WORKDIR /app
+WORKDIR /django
 EXPOSE 8000
 
 RUN python -m venv /venv 

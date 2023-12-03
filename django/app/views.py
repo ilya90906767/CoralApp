@@ -3,9 +3,10 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from .forms import LoginForm, RegisterForm
 from django.http import HttpResponse
-from django.contrib.auth.models import User, auth
+from django.contrib.auth.models import auth
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
+from .models import User
 
 
 def about(request):
@@ -14,6 +15,7 @@ def about(request):
 def sign_up(request):
     # if this is a POST request we need to process the form data
     if request.method == "POST":
+        full_n = request.POST.get('full_n')
         email = request.POST.get('email')
         password= request.POST.get('password')
         username = request.POST.get('username')
@@ -24,7 +26,7 @@ def sign_up(request):
             messages.error(request, f"Your email is not correct!")
         if password!=password2:
             messages.error(request, f"Your passwords are different! Check your password")
-            
+        User.objects.create(full_n=full_n,email=email,password=password)
         
         #user = User.objects.create_user(username=username,password = password, email = email)
         #user.save
