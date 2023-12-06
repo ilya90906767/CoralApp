@@ -5,5 +5,5 @@ DB_HOST=db
 DB_NAME=coraldb
 DB_USER=
 DB_PASS=
-
+DB_DIR = 
 #rename this to .env

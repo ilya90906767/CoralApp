@@ -18,7 +18,6 @@ def sign_up(request):
         full_n = request.POST.get('full_n')
         email = request.POST.get('email')
         password= request.POST.get('password')
-        username = request.POST.get('username')
         password2 = request.POST.get('password2') 
         try:
             validate_email(email)
@@ -26,7 +25,8 @@ def sign_up(request):
             messages.error(request, f"Your email is not correct!")
         if password!=password2:
             messages.error(request, f"Your passwords are different! Check your password")
-        User.objects.create(full_n=full_n,email=email,password=password)
+        new_user = User.objects.create(full_n=full_n,email=email,password=password)
+        new_user.save()
         
         #user = User.objects.create_user(username=username,password = password, email = email)
         #user.save
