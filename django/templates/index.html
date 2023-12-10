@@ -24,7 +24,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">CoralWeb</a>
+                <a class="navbar-brand" href="/about">CoralWeb</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -75,6 +75,14 @@
                             </li>
                         </ul>
                     </li>
+                    {% if user.is_authenticated %}
+                        <li>
+                            <a href="/logout">Logout</a>
+                        </li>
+                    {% endif %}
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
